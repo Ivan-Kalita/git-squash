@@ -18,5 +18,5 @@ Then execute:
 ```
 git squash a1b23f4e
 ```
-This command will leave default commit message containing description of all squashed commits. If you don't need it just use git ammend command. 
+This command will leave default commit message containing description of all squashed commits. If you don't need it just use `git commit --amend` command to edit message as you wish. 
 Or simply use `git reset --soft` and `git commit` after that without using `--squash` feature.
