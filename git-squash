@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately
 if [[ "$#" -ge "1" ]]; then
   targetBranch=$1
   currentBranch=$(git branch --show-current)
@@ -6,7 +8,9 @@ if [[ "$#" -ge "1" ]]; then
   git reset --hard $targetBranch
   git merge --no-edit --squash "$currentBranch"_back
   git commit --no-edit
-  git branch -D "$currentBranch"_back
+  if [[ "$2" != "--safe" ]]; then
+    git branch -D "$currentBranch"_back
+  fi
 else
-  echo "specify target branch or commit hash"
+  echo "specify target branch to rebase with sqash as first argument; optionaly provide '--safe' flag to preserve backup branch"
 fi
